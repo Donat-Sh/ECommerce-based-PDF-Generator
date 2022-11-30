@@ -1,4 +1,4 @@
-﻿using PdfApp.Domain;
+﻿using Core.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
