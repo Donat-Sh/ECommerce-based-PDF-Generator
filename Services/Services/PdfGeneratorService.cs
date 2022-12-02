@@ -32,6 +32,7 @@ namespace Services.Services
             try
             {
                 var convertedPdf = GetConvertedPdfDto();
+                var fileNameOutput = @"ConvertedPdfDocument.pdf";
 
                 if (pdfInput != null)
                 {
@@ -49,7 +50,7 @@ namespace Services.Services
                                 Bottom = pdfInput.Options.PageMargins.Bottom,
                                 Left = pdfInput.Options.PageMargins.Left
                             },
-                            Out = @"ConvertedPdfDocument.pdf"
+                            Out = fileNameOutput
                         },
                         Objects =
                         {
@@ -71,6 +72,7 @@ namespace Services.Services
                     };
 
                     byte[] generatedPdf = _pdfConversion.Convert(inputDoc);
+                    ByteArrayToFile(fileNameOutput, generatedPdf);
                 }
 
                 return convertedPdf;
@@ -88,6 +90,24 @@ namespace Services.Services
         #endregion PdfGeneration
 
         #region Helpers
+
+        public void ByteArrayToFile(string fileName, byte[] byteArray)
+        {
+            try
+            {
+                var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write); //Open file for reading
+
+                fileStream.Write(byteArray, 0, byteArray.Length); //Writes a block of bytes to this stream using data from  a byte array.
+
+                fileStream.Close();
+            }
+            catch (Exception exception)
+            {
+                //code...
+
+                throw;
+            }
+        }
 
         #endregion Helpers
 
