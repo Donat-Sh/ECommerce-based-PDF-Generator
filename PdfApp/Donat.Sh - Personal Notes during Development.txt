@@ -14,6 +14,9 @@ Below is personal thoughts about current TaskFlow Structuring :
 	--> Add 'Core' CL. : [DONE].
 	--> Add 'Services' CL. : [DONE].
 	--> Add 'Persistence' CL. : [DONE].
+
+	--> Add Dependency Injection : [DONE].
+	--> if time, Add AutoMapper : [Aw].
 }
 
 
