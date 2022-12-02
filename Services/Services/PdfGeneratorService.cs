@@ -27,9 +27,19 @@ namespace Services.Services
 
         public async Task<PdfOutput> ConvertHtmlToPdf(PdfInput pdfInput, CancellationToken cancellationToken)
         {
-            //code...
+            try
+            {
+                //code...
 
-            return null;
+                return null;
+            }
+            catch (Exception exception)
+            {
+                //code...
+
+
+                throw;
+            } 
         }
 
         #endregion ConvertHtmlToPdf
