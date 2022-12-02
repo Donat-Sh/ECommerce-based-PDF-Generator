@@ -9,7 +9,13 @@ namespace Services.Interfaces
 
         #region ConvertHtmlToPdf
 
-        Task<PdfOutput> ConvertHtmlToPdf(PdfInput pdfInput);
+        Task<IResult> ConvertHtmlToPdf(PdfInput pdfInput, CancellationToken cancellationToken);
+
+        #endregion ConvertHtmlToPdf
+
+        #region ConvertHtmlToPdf
+
+        Task<PdfOutput> TestingConvertHtmlToPdf(PdfInput pdfInput, CancellationToken cancellationToken);
 
         #endregion ConvertHtmlToPdf
 

@@ -12,9 +12,7 @@ Below is personal thoughts about current TaskFlow Structuring :
 0) Clean Architecture : [DONE].
 {
 	--> Add 'Core' CL. : [DONE].
-
 	--> Add 'Services' CL. : [DONE].
-
 	--> Add 'Persistence' CL. : [DONE].
 }
 
@@ -27,10 +25,10 @@ I) PDF Generation should be one way mapping, HTML -> PDF.
 II) Implement Minimal APIs : [IP].
 {
 	--> Research Clean Architecture based solution : [DONE].
-
-	--> Create Interface for PDF Conversion : [IP].
-
-	--> Create Service implementing I. : [IP].
+	--> Create Interface for PDF Conversion : [DONE].
+	--> Create Service implementing I. : [DONE].
+	
+	--> Add Simple ApiContext with EF. in memory : [IP].
 }
 
 
@@ -52,11 +50,8 @@ IV) Add Fluent Validation : [IP].
 V) Add Core Objects : [DONE].
 {
 	--> Create Core CL. : [DONE].
-
 	--> Move all preExisting DTOs : [DONE].
-
 	--> Fill data for the 'PdfOption.cs' class : [DONE].
-	
 		--> Create 'PageMargin.cs' class " [DONE].
 }
 

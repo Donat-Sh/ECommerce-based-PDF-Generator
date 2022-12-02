@@ -11,7 +11,11 @@ app.MapPost("/", (HttpRequest request, PdfInput? input) => {
     return Results.Ok(new PdfOutput(errorMessage: "To be implemented"));
 });
 
+var test = Results.Ok(new PdfOutput(errorMessage: "To be implemented"));
+
 app.MapGet("/", () => "Hello World!");
+
+app.MapPost("/GeneratePdfFromHtml", );
 
 #endregion MinimalAPIs
 
