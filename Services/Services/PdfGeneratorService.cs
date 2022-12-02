@@ -1,6 +1,7 @@
 ﻿using Core.Domain;
 using Services.Interfaces;
 using System;
+using WkHtmlToPdfDotNet.Contracts;
 
 namespace Services.Services
 {
@@ -8,15 +9,15 @@ namespace Services.Services
     {
         #region Properties
 
-        //code... ApiContext maybe?
+        private readonly IConverter _pdfConversion;
 
         #endregion Properties
 
         #region Ctor
 
-        public PdfGeneratorService()
+        public PdfGeneratorService(IConverter pdfConversion)
         {
-            //code...
+            _pdfConversion = pdfConversion;
         }
 
         #endregion Ctor
