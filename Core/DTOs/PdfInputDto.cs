@@ -7,13 +7,13 @@ namespace Core.Domain
         #region Properties
 
         public string? HtmlString { get; }
-        public PdfOptions? Options { get; }
+        public PdfOptionsDto? Options { get; }
 
         #endregion Properties
 
         #region Ctor
 
-        public PdfInput(string htmlString)
+        public PdfInputDto(string htmlString)
         {
             HtmlString = htmlString;
         }

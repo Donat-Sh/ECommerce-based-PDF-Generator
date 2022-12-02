@@ -19,9 +19,9 @@ namespace Core.Domain
 
         #region Ctor
 
-        public PdfOutput(string errorMessage) => ErrorMessage = errorMessage;
+        public PdfOutputDto(string errorMessage) => ErrorMessage = errorMessage;
 
-        public PdfOutput(string pdfDocument, int pdfDocumentSize)
+        public PdfOutputDto(string pdfDocument, int pdfDocumentSize)
         {
             PdfDocument = pdfDocument;
             PdfDocumentSize = pdfDocumentSize;
