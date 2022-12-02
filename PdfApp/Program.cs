@@ -1,4 +1,6 @@
 ﻿using Core.Domain;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Context;
 using Services.Interfaces;
 using Services.Services;
 
@@ -9,6 +11,7 @@ var app = builder.Build();
 
 #region ServiceInjection
 
+builder.Services.AddDbContext<PdfApiContext>(opt => opt.UseInMemoryDatabase("PdfApi"));
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
 #endregion ServiceInjection

@@ -29,6 +29,7 @@ II) Implement Minimal APIs : [IP].
 	--> Create Service implementing I. : [DONE].
 	
 	--> Add Simple ApiContext with EF. in memory : [IP].
+	--> Add DTO variant of all Domain classes : [IP].
 }
 
 
