@@ -25,7 +25,7 @@ namespace Services.Services
 
         #region ConvertHtmlToPdf
 
-        public async Task<PdfOutput> ConvertHtmlToPdf(PdfInput pdfInput)
+        public async Task<PdfOutput> ConvertHtmlToPdf(PdfInput pdfInput, CancellationToken cancellationToken)
         {
             //code...
 
