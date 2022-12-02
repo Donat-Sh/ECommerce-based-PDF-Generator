@@ -2,7 +2,7 @@
 
 namespace Core.Domain
 {
-    public class PageMargins
+    public class PageMarginsDto
     {
         #region Properties
 
@@ -15,7 +15,7 @@ namespace Core.Domain
 
         #region Ctor
 
-        public PageMargins()
+        public PageMarginsDto()
         {
             
         }
