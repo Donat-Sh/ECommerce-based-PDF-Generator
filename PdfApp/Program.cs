@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Services.Interfaces;
 using Services.Services;
+using WkHtmlToPdfDotNet;
+using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ var app = builder.Build();
 #region ServiceInjection
 
 builder.Services.AddDbContext<PdfApiContext>(opt => opt.UseInMemoryDatabase("PdfApi"));
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
 #endregion ServiceInjection
