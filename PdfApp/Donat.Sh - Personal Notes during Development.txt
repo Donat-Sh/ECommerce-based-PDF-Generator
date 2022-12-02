@@ -19,17 +19,20 @@ Below is personal thoughts about current TaskFlow Structuring :
 
 
 I) PDF Generation should be one way mapping, HTML -> PDF.
+{
+	--> Add logic within Service layer method to Finalize the Conversion : [IP].
+}
 
 
 
-II) Implement Minimal APIs : [IP].
+II) Implement Minimal APIs : [DONE].
 {
 	--> Research Clean Architecture based solution : [DONE].
 	--> Create Interface for PDF Conversion : [DONE].
 	--> Create Service implementing I. : [DONE].
 	
 	--> Add Simple ApiContext with EF. in memory : [DONE].
-	--> Add DTO variant of all Domain classes : [IP].
+	--> Add DTO variant of all Domain classes : [DONE].
 }
 
 
