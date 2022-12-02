@@ -1,0 +1,12 @@
+~ ~ ~ ~ ~
+
+Donat.Sherifi Dev. Notes.
+
+PDF Generation API - Bucakroo
+
+~ ~ ~ ~ ~
+
+Below is personal thoughts about current TaskFlow Structuring :
+
+I) PDF Generation should be one way mapping, HTML -> PDF.
+
