@@ -8,5 +8,15 @@ PDF Generation API - Bucakroo
 
 Below is personal thoughts about current TaskFlow Structuring :
 
+0) Clean Architecture : [DONE].
+{
+	--> Add 'Core' CL. : [DONE].
+
+	--> Add 'Services' CL. : [DONE].
+
+	--> Add 'Persistence' CL. : [IP].
+}
+
 I) PDF Generation should be one way mapping, HTML -> PDF.
+
 
