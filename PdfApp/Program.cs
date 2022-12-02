@@ -25,7 +25,7 @@ app.MapGet("/", () => "Hello World!");
 
 #region GeneratePdfFromHtml
 
-app.MapPost("/GeneratePdfFromHtml", async (PdfInput? pdfInput, CancellationToken cancellationToken, IPdfGeneratorService pdfGeneratorService)
+app.MapPost("/GeneratePdfFromHtml", async (PdfInputDto? pdfInput, CancellationToken cancellationToken, IPdfGeneratorService pdfGeneratorService)
     => Results.Ok(await pdfGeneratorService.ConvertHtmlToPdf(pdfInput, cancellationToken)));
 
 #endregion GeneratePdfFromHtml
