@@ -37,7 +37,6 @@ namespace Services.Services
             {
                 //code...
 
-
                 throw;
             } 
         }
