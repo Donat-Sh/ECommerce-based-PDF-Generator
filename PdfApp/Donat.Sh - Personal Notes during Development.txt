@@ -8,15 +8,69 @@ PDF Generation API - Bucakroo
 
 Below is personal thoughts about current TaskFlow Structuring :
 
+
 0) Clean Architecture : [DONE].
 {
 	--> Add 'Core' CL. : [DONE].
 
 	--> Add 'Services' CL. : [DONE].
 
-	--> Add 'Persistence' CL. : [IP].
+	--> Add 'Persistence' CL. : [DONE].
 }
 
+
+
 I) PDF Generation should be one way mapping, HTML -> PDF.
+
+
+
+II) Implement Minimal APIs : [IP].
+{
+	--> Research Clean Architecture based solution : [DONE].
+
+	--> Create Interface for PDF Conversion : [IP].
+
+	--> Create Service implementing I. : [IP].
+}
+
+
+
+III) Implement API Key Authentication : [IP].
+{
+	--> ... : [...].
+}
+
+
+
+IV) Add Fluent Validation : [IP].
+{
+	--> ... : [...].
+}
+
+
+
+V) Add Core Objects : [IP].
+{
+	--> Create Core CL. : [DONE].
+
+	--> Move all preExisting DTOs : [DONE].
+
+	--> Fill data for the 'PdfOption.cs' class : [IP].
+	
+		--> Create 'PageMargin.cs' class " [IP].
+}
+
+
+
+VI) Add Unit Testing, if time : [P].
+{
+	--> ... : [...].
+}
+
+
+VII) Add Docker Support : [P].
+{
+	--> ... : [...].
+}
 
 
