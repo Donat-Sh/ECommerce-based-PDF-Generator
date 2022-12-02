@@ -49,15 +49,15 @@ IV) Add Fluent Validation : [IP].
 
 
 
-V) Add Core Objects : [IP].
+V) Add Core Objects : [DONE].
 {
 	--> Create Core CL. : [DONE].
 
 	--> Move all preExisting DTOs : [DONE].
 
-	--> Fill data for the 'PdfOption.cs' class : [IP].
+	--> Fill data for the 'PdfOption.cs' class : [DONE].
 	
-		--> Create 'PageMargin.cs' class " [IP].
+		--> Create 'PageMargin.cs' class " [DONE].
 }
 
 
