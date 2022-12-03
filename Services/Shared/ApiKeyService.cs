@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Persistence.Context;
+using Services.Interfaces;
 
 namespace Services.Shared
 {
-    public class ApiKeyService
+    public class ApiKeyService : IApiKeyService
     {
         #region Properties
 
