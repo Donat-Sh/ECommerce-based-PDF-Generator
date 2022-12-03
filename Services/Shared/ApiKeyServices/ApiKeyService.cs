@@ -32,30 +32,6 @@ namespace Services.Shared.ApiKeyServices
 
         #endregion Ctor
 
-        #region Authentication
-
-        #region ApiKey-Validation
-
-        public async Task<bool> ValidateApiKey(string apiKeyValue, CancellationToken cancellationToken)
-        {
-            try
-            {
-                //code...
-
-                return false;
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, $"Error happened on {nameof(ValidateApiKey)}, whilst attempting to Validate given ApiKey Value for Authentication!");
-
-                throw;
-            }
-        }
-
-        #endregion ApiKey-Validation
-
-        #endregion Authentication
-
         #region Helpers
 
         #region GenerateApiKey
