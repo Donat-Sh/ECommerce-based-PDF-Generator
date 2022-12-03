@@ -6,8 +6,8 @@ namespace Core.Domain
     {
         #region Properties
 
-        public string? HtmlString { get; }
-        public PdfOptionsDto? Options { get; }
+        public string HtmlString { get; set; }
+        public PdfOptionsDto Options { get; set; }
 
         #endregion Properties
 

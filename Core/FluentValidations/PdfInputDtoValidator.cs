@@ -15,7 +15,7 @@ namespace Core.FluentValidations
 
             #region Complex Properties
 
-            RuleFor(x => x.Options).SetValidator(new PdfOptionsDtoValidator());
+            RuleFor(x => x.Options).NotNull().SetValidator(new PdfOptionsDtoValidator());
 
             #endregion Complex Properties
         }
