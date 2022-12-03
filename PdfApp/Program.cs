@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Services.Interfaces;
@@ -7,6 +8,12 @@ using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region FluentValidation
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+#endregion FluentValidation
 
 // Add services to the container.
 var app = builder.Build();
