@@ -9,9 +9,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{B4286987-7954-46CD-908B-1E174F8C4FC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9F83C0AE-972B-4075-AA49-1914ED048C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{9F83C0AE-972B-4075-AA49-1914ED048C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{78183105-9ABC-4C78-826A-33F47848ED8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{78183105-9ABC-4C78-826A-33F47848ED8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurations", "Configurations\Configurations.csproj", "{3730D330-37A7-4E29-8B79-E23982401433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{78183105-9ABC-4C78-826A-33F47848ED8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78183105-9ABC-4C78-826A-33F47848ED8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78183105-9ABC-4C78-826A-33F47848ED8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3730D330-37A7-4E29-8B79-E23982401433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3730D330-37A7-4E29-8B79-E23982401433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3730D330-37A7-4E29-8B79-E23982401433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3730D330-37A7-4E29-8B79-E23982401433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
