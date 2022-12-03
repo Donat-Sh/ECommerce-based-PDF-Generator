@@ -14,9 +14,6 @@ using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var app = builder.Build();
-
 #region ServiceInjection
 
 builder.Services.AddDbContext<PdfApiContext>(opt => opt.UseInMemoryDatabase("PdfApi"));
@@ -103,6 +100,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 #endregion Swagger
+
+// Add services to the container.
+var app = builder.Build();
 
 #region MinimalAPIs
 
