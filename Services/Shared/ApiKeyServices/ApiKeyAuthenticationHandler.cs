@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Services.Interfaces.Shared;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
@@ -8,11 +9,17 @@ namespace Services.Shared.ApiKeyServices
 {
     public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
     {
+        #region Properties
+
+        private readonly ICacheService _cacheService;
+
+        #endregion Properties
+
         #region Ctor
 
-        public ApiKeyAuthenticationHandler(IOptionsMonitor<ApiKeyAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+        public ApiKeyAuthenticationHandler(IOptionsMonitor<ApiKeyAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, ICacheService cacheService) : base(options, logger, encoder, clock)
         {
-            
+            _cacheService = cacheService;
         }
 
         #endregion Ctor
@@ -27,7 +34,7 @@ namespace Services.Shared.ApiKeyServices
                 return AuthenticateResult.Fail("Bad Header Parameters for ApiKey");
             }
 
-            var clientId = await GetClientIdFromApiKey(apiKey);
+            var clientId = _cacheService.GetClientIdFromApiKey(apiKey);
 
             if (clientId == null)
             {
@@ -40,8 +47,7 @@ namespace Services.Shared.ApiKeyServices
 
             var claims = new[]
             {
-                //new Claim(ClaimTypes.Name, clientId.ToString())
-                new Claim(clientId.ToString())
+                new Claim(ClaimTypes.Name, clientId.ToString())
             };
             
             var identity = new ClaimsIdentity(claims, ApiKeyAuthenticationOptions.DefaultScheme);
