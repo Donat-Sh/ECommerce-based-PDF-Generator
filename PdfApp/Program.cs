@@ -96,13 +96,17 @@ builder.Services.AddSwaggerGen(setup =>
 
 #endregion AuthenticationGen
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
 #endregion Swagger
 
 // Add services to the container.
 var app = builder.Build();
+
+#region SwaggerUI
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+#endregion SwaggerUI
 
 #region MinimalAPIs
 
