@@ -45,6 +45,22 @@ namespace Services.Shared.CachingService
 
         #endregion GetClientIdFromApiKey
 
+        #region InvalidateApiKey
+
+        public void InvalidateApiKey(string apiKey)
+        {
+            if (_memoryCache.TryGetValue<Dictionary<string, Guid>>("Authentication_ApiKeys", out var internalKeys))
+            {
+                if (internalKeys.ContainsKey(apiKey))
+                {
+                    internalKeys.Remove(apiKey);
+                    _memoryCache.Set("Authentication_ApiKeys", internalKeys);
+                }
+            }
+        }
+
+        #region InvalidateApiKey
+
         #region Helpers
 
         public Dictionary<string, Guid> GetCurrentExistingClients() => new Dictionary<string, Guid>()

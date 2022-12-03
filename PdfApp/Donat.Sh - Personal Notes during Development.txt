@@ -50,6 +50,9 @@ III) Implement API Key Authentication : [IP].
 	--> Configure the Services for cleaner Architecture : [DONE].
 	--> Create the Microsoft Identity based 'ApiKeyAuthenticationOptions' Schema Service : [DONE].
 	--> Implement 'ApiKeyAuthenticationHandler' Schema Service : [DONE].
+
+	--> Implement Caching Service for faster performance : [DONE].
+	--> Add Ioc. Dependency Injection foreach new service : [DONE].
 }
 
 
