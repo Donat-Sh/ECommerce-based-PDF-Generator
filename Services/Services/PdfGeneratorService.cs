@@ -58,8 +58,8 @@ namespace Services.Services
                             {
                                 PagesCount = true,
                                 HtmlContent = pdfInput.HtmlString,
-                                //WebSettings = { DefaultEncoding = "utf-8" },
-                                WebSettings = { DefaultEncoding = "Base64Encode" },
+                                WebSettings = { DefaultEncoding = "utf-8" },
+                                //WebSettings = { DefaultEncoding = "Base64Encode" },
                                 HeaderSettings =
                                 {
                                     FontSize = 9,

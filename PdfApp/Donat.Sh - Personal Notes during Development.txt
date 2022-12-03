@@ -16,6 +16,7 @@ Below is personal thoughts about current TaskFlow Structuring :
 	--> Add 'Persistence' CL. : [DONE].
 
 	--> Add Dependency Injection : [DONE].
+	--> Add ILogger : [IP].
 	--> if time, Add AutoMapper : [Aw].
 }
 
