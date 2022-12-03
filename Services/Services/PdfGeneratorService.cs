@@ -1,4 +1,6 @@
 ﻿using Core.Domain;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
 using Persistence.Context;
 using Services.Interfaces;
@@ -14,6 +16,7 @@ namespace Services.Services
         private readonly PdfApiContext _pdfApiContext;
         private readonly ILogger<PdfGeneratorService> _logger;
         private readonly IConverter _pdfConversion;
+        private readonly IValidator<PdfInputDto> _validator;
 
         #endregion Properties
 
@@ -22,12 +25,14 @@ namespace Services.Services
         public PdfGeneratorService(
                                        PdfApiContext pdfApiContext,
                                        IConverter pdfConversion,
-                                       ILogger<PdfGeneratorService> logger
+                                       ILogger<PdfGeneratorService> logger,
+                                       IValidator<PdfInputDto> validator
                                   )
         {
             _pdfApiContext = pdfApiContext;
             _logger = logger;
             _pdfConversion = pdfConversion;
+            _validator = validator;
         }
 
         #endregion Ctor
@@ -66,6 +71,14 @@ namespace Services.Services
             {
                 var convertedPdf = GetConvertedPdfDto();
                 var fileNameOutput = @"ConvertedPdfDocument.pdf";
+                var result = await _validator.ValidateAsync(pdfInput);
+
+                if (!result.IsValid)
+                {
+                    var errorMessage = "Given PdfInputDto failed Validations";
+                    _logger.LogInformation(errorMessage);
+                    return GetFailedValidationPdfOutput(errorMessage);
+                }
 
                 if (pdfInput != null)
                 {
@@ -146,14 +159,27 @@ namespace Services.Services
 
         #endregion ByteArrayToFile
 
-        #endregion Helpersz`
+        #endregion Helpers
 
         #region Private-Methods
 
+        #region GetConvertedPdfDto
+
         private PdfOutputDto GetConvertedPdfDto() => new PdfOutputDto("")
         {
-            //code...
+            
         };
+
+        #endregion GetConvertedPdfDto
+
+        #region GetFailedValidationPdfOutput
+
+        private PdfOutputDto GetFailedValidationPdfOutput(string errorMessage) => new PdfOutputDto(errorMessage)
+        {
+            IsSuccess = false
+        };
+
+        #endregion GetFailedValidationPdfOutput
 
         #endregion Private-Methods
     }

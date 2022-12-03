@@ -6,7 +6,7 @@ namespace Core.Domain
     {
         #region Properties
 
-        public bool IsSuccess => string.IsNullOrEmpty(ErrorMessage);
+        public bool IsSuccess { get; set; }
         public string ErrorMessage { get; private set; }
         public string PdfDocument { get; private set; }
         public int PdfDocumentSize { get; private set; }

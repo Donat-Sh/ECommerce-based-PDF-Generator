@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.FluentValidations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
@@ -9,11 +10,6 @@ using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region FluentValidation
-
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
-#endregion FluentValidation
 
 // Add services to the container.
 var app = builder.Build();
@@ -35,6 +31,17 @@ var loggerFactory = LoggerFactory.Create(builder =>
 });
 
 #endregion ILogger
+
+#region FluentValidation
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+builder.Services.AddScoped<IValidator<PdfInputDto>, PdfInputDtoValidator>();
+builder.Services.AddScoped<IValidator<PageMarginsDto>, PageMarginsDtoValidator>();
+builder.Services.AddScoped<IValidator<PdfOptionsDto>, PdfOptionsDtoValidator>();
+builder.Services.AddScoped<IValidator<PdfOutputDto>, PdfOutputDtoValidator>();
+
+#endregion FluentValidation
 
 #region MinimalAPIs
 
