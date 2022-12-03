@@ -62,6 +62,9 @@ V) Add Core Objects : [DONE].
 	--> Move all preExisting DTOs : [DONE].
 	--> Fill data for the 'PdfOption.cs' class : [DONE].
 		--> Create 'PageMargin.cs' class " [DONE].
+	
+	--> Add Enum Folder : [DONE].
+		--> Create 'LogLevelEnum.cs' class : [DONE].
 }
 
 
