@@ -104,7 +104,12 @@ var app = builder.Build();
 #region SwaggerUI
 
 app.UseSwagger();
-app.UseSwaggerUI();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pdf Generation Api v.1.2)");
+    c.RoutePrefix = "";
+});
 
 #endregion SwaggerUI
 
