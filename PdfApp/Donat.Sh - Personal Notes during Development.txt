@@ -47,7 +47,9 @@ II) Implement Minimal APIs : [DONE].
 
 III) Implement API Key Authentication : [IP].
 {
-	--> ... : [...].
+	--> Configure the Services for cleaner Architecture : [DONE].
+	--> Create the Microsoft Identity based 'ApiKeyAuthenticationOptions' Schema Service : [DONE].
+	--> Implement 'ApiKeyAuthenticationHandler' Schema Service : [DONE].
 }
 
 
