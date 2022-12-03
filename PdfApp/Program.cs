@@ -22,6 +22,13 @@ builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
 #endregion ServiceInjection
 
+#region AutoMapper
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddControllersWithViews();
+
+#endregion AutoMapper
+
 #region ILogger
 
 var loggerFactory = LoggerFactory.Create(builder =>
