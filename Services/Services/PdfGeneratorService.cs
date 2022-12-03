@@ -136,7 +136,7 @@ namespace Services.Services
             }
             catch (Exception exception)
             {
-                //code...
+                _logger.LogError(exception, $"Error happened on {nameof(ByteArrayToFile)}, whilst attempting to Save .pdf file from byte[] array!");
 
                 throw;
             }
