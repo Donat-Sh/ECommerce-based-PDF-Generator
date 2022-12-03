@@ -6,9 +6,9 @@ namespace Core.Domain
     {
         #region Properties
 
-        public int ColorMode { get; set; }
-        public int PageOrientation { get; set; }
-        public int PagePaperSize { get; set; }
+        public string ColorMode { get; set; }
+        public string PageOrientation { get; set; }
+        public string PagePaperSize { get; set; }
         public PageMarginsDto PageMargins { get; set; }
         public string ErrorMessage { get; set; }
 

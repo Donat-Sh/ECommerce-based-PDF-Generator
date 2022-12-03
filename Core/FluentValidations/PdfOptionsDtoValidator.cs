@@ -10,9 +10,9 @@ namespace Core.FluentValidations
         {
             #region Properties
 
-            RuleFor(x => x.ColorMode).NotNull().GreaterThan(0).WithMessage("The value for 'ColorMode' cannot be null or negative/zero");
-            RuleFor(x => x.PageOrientation).NotNull().GreaterThan(0).WithMessage("The value for 'PageOrientation' cannot be null or negative/zero");
-            RuleFor(x => x.PagePaperSize).NotNull().GreaterThan(0).WithMessage("The value for 'PagePaperSize' cannot be null or negative/zero");
+            RuleFor(x => x.ColorMode).NotEmpty().WithMessage("The value for 'ColorMode' cannot be null or empty");
+            RuleFor(x => x.PageOrientation).NotEmpty().WithMessage("The value for 'PageOrientation' cannot be null or empty");
+            RuleFor(x => x.PagePaperSize).NotEmpty().WithMessage("The value for 'PagePaperSize' cannot be null or empty");
 
             #endregion Properties
 

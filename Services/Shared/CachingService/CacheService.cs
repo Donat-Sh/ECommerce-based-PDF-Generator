@@ -65,7 +65,7 @@ namespace Services.Shared.CachingService
 
         public Dictionary<string, Guid> GetCurrentExistingClients() => new Dictionary<string, Guid>()
         {
-            { "X-API-KEY", new Guid("7a8a7cd837b042b58b56617114f4d3d7") }
+            { "7a8a7cd837b042b58b56617114f4d3d7", Guid.NewGuid() }
         };
 
         #endregion Helpers

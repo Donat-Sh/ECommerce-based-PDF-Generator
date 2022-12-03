@@ -1,8 +1,11 @@
 ﻿using Core.Domain;
 using Core.FluentValidations;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PdfApp.Attributes;
+using PdfApp.Middlewares;
 using Persistence.Context;
 using Services.Interfaces;
 using Services.Interfaces.Shared;
@@ -22,15 +25,6 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
-
-#region ApiKeyAuthentication
-
-builder.Services.AddScoped<ApiKeyAuthenticationHandler>();
-builder.Services.AddAuthentication().AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, null);
-
-builder.Services.AddAuthentication(ApiKeyAuthenticationOptions.DefaultScheme);
-
-#endregion ApiKeyAuthentication
 
 #endregion ServiceInjection
 
@@ -69,29 +63,33 @@ builder.Services.AddSwaggerGen();
 
 #region AuthenticationGen
 
-builder.Services.AddSwaggerGen(setup =>
+builder.Services.AddSwaggerGen(c =>
 {
-    setup.AddSecurityDefinition(ApiKeyAuthenticationOptions.DefaultScheme, new OpenApiSecurityScheme
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pdf-Api Api-Key Authentication", Version = "v1" });
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
+        Description = "ApiKey must appear in header",
+        Type = SecuritySchemeType.ApiKey,
+        Name = "XApiKey",
         In = ParameterLocation.Header,
-        Name = ApiKeyAuthenticationOptions.HeaderName,
-        Type = SecuritySchemeType.ApiKey
+        Scheme = "ApiKeyScheme"
     });
 
-    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    var key = new OpenApiSecurityScheme()
     {
+        Reference = new OpenApiReference
         {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = ApiKeyAuthenticationOptions.DefaultScheme
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+            Type = ReferenceType.SecurityScheme,
+            Id = "ApiKey"
+        },
+        In = ParameterLocation.Header
+    };
+    var requirement = new OpenApiSecurityRequirement
+    {
+        { key, new List<string>() }
+    };
+    
+    c.AddSecurityRequirement(requirement);
 });
 
 #endregion AuthenticationGen
@@ -112,6 +110,12 @@ app.UseSwaggerUI(c =>
 });
 
 #endregion SwaggerUI
+
+#region Middleware
+
+app.UseMiddleware<ApiKeyMiddleware>();
+
+#endregion Middleware
 
 #region MinimalAPIs
 

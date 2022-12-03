@@ -2,6 +2,7 @@
 using Core.Domain;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using PdfApp.Attributes;
 using Persistence.Context;
 using Services.Interfaces;
 using WkHtmlToPdfDotNet;
@@ -61,13 +62,18 @@ namespace Services.Services
 
                 if (pdfInput != null)
                 {
+                    var test = (ColorMode)Enum.Parse(typeof(ColorMode), pdfInput.Options.ColorMode);
+
                     var inputDoc = new HtmlToPdfDocument()
                     {
                         GlobalSettings =
                         {
-                            ColorMode = (ColorMode)pdfInput.Options.ColorMode,
-                            Orientation = (Orientation)pdfInput.Options.PageOrientation,
-                            PaperSize = (PaperKind)pdfInput.Options.PagePaperSize,
+                            ColorMode = ColorMode.Color,
+                            //ColorMode = (ColorMode)Enum.Parse(typeof(ColorMode), pdfInput.Options.ColorMode),
+                            Orientation = Orientation.Portrait,
+                            //Orientation = (Orientation)Enum.Parse(typeof(Orientation), pdfInput.Options.ColorMode),
+                            PaperSize = PaperKind.A4,
+                            //PaperSize = (PaperKind)Enum.Parse(typeof(PaperKind), pdfInput.Options.ColorMode),
                             Margins = new MarginSettings()
                             {
                                 Top = pdfInput.Options.PageMargins.Top,
@@ -104,6 +110,8 @@ namespace Services.Services
             }
             catch (Exception exception)
             {
+                var errrMsg = exception.ToString();
+
                 _logger.LogError(exception, $"Error happened on {nameof(ConvertHtmlToPdf)}, whilst attempting to Convert InputData from HTML --> PDF!");
 
                 throw;
@@ -127,6 +135,8 @@ namespace Services.Services
                 fileStream.Write(byteArray, 0, byteArray.Length); //Writes a block of bytes to this stream using data from  a byte array.
 
                 fileStream.Close();
+
+                _logger.LogInformation("Successfully Logged the .Pdf created file!");
             }
             catch (Exception exception)
             {
