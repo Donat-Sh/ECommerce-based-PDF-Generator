@@ -52,9 +52,16 @@ III) Implement API Key Authentication : [IP].
 
 
 
-IV) Add Fluent Validation : [IP].
+IV) Add Fluent Validation : [DONE].
 {
-	--> ... : [...].
+	--> Install Nuget Packase : [DONE].
+	--> Configure Dependency Injection : [DONE].
+	
+	--> Add Abstract Validation <T> : [DONE].
+	--> Add 'PdfInputDto.cs' Validation : [DONE].
+	--> Add 'PdfOutputDto.cs' Validation : [DONE].
+	--> Add 'PdfOptionsDto.cs' Validation : [DONE].
+	--> Add 'PdfMarginsDto.cs' Validation : [DONE].
 }
 
 
