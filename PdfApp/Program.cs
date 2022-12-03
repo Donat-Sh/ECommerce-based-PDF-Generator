@@ -19,6 +19,16 @@ builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
 #endregion ServiceInjection
 
+#region ILogger
+
+var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddConsole();
+    builder.AddDebug();
+});
+
+#endregion ILogger
+
 #region MinimalAPIs
 
 app.MapGet("/", () => "Hello World!");
