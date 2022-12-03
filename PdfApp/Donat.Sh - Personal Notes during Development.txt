@@ -17,15 +17,18 @@ Below is personal thoughts about current TaskFlow Structuring :
 	--> Add 'Configurations' CL. : [DONE].
 
 	--> Add Dependency Injection : [DONE].
-	--> Add ILogger : [IP].
+	--> Add ILogger : [DONE].
+		--> Add Ioc. : [DONE].
+		--> Log Errors on each exception : [DONE].
+	
 	--> if time, Add AutoMapper : [Aw].
 }
 
 
 
-I) PDF Generation should be one way mapping, HTML -> PDF.
+I) PDF Generation should be one way mapping, HTML -> PDF.: [DONE].
 {
-	--> Add logic within Service layer method to Finalize the Conversion : [IP].
+	--> Add logic within Service layer method to Finalize the Conversion : [DONE].
 }
 
 
@@ -69,13 +72,7 @@ V) Add Core Objects : [DONE].
 
 
 
-VI) Add Unit Testing, if time : [P].
-{
-	--> ... : [...].
-}
-
-
-VII) Add Docker Support : [P].
+VI) Add Docker Support : [P].
 {
 	--> ... : [...].
 }
