@@ -10,7 +10,6 @@ using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 var app = builder.Build();
 
@@ -24,7 +23,7 @@ builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
 #region AutoMapper
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddControllersWithViews();
 
 #endregion AutoMapper

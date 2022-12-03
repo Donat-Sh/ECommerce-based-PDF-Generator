@@ -1,6 +1,6 @@
-﻿using Core.Domain;
+﻿using AutoMapper;
+using Core.Domain;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
 using Persistence.Context;
 using Services.Interfaces;
@@ -17,6 +17,7 @@ namespace Services.Services
         private readonly ILogger<PdfGeneratorService> _logger;
         private readonly IConverter _pdfConversion;
         private readonly IValidator<PdfInputDto> _validator;
+        private readonly IMapper _mapper;
 
         #endregion Properties
 
@@ -26,13 +27,15 @@ namespace Services.Services
                                        PdfApiContext pdfApiContext,
                                        IConverter pdfConversion,
                                        ILogger<PdfGeneratorService> logger,
-                                       IValidator<PdfInputDto> validator
+                                       IValidator<PdfInputDto> validator,
+                                       IMapper mapper
                                   )
         {
             _pdfApiContext = pdfApiContext;
             _logger = logger;
             _pdfConversion = pdfConversion;
             _validator = validator;
+            _mapper = mapper;
         }
 
         #endregion Ctor
