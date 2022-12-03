@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Persistence.Context;
 using Services.Interfaces;
 using System.IO;
 using WkHtmlToPdfDotNet;
@@ -10,14 +11,19 @@ namespace Services.Services
     {
         #region Properties
 
+        private readonly PdfApiContext _pdfApiContext;
         private readonly IConverter _pdfConversion;
 
         #endregion Properties
 
         #region Ctor
 
-        public PdfGeneratorService(IConverter pdfConversion)
+        public PdfGeneratorService(
+                                       PdfApiContext pdfApiContext,
+                                       IConverter pdfConversion
+                                  )
         {
+            _pdfApiContext = pdfApiContext;
             _pdfConversion = pdfConversion;
         }
 
