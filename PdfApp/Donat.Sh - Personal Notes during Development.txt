@@ -79,6 +79,14 @@ V) Add Core Objects : [DONE].
 
 
 
+VI) Add Swagger Support : [IP].
+{
+	--> Configure NugetPackages : [IP].
+	--> Add Swagger Dashboard for all endpoints : [IP].
+}
+
+
+
 VI) Add Docker Support : [P].
 {
 	--> ... : [...].
