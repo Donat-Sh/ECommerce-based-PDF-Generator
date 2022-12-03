@@ -2,6 +2,7 @@
 using Core.FluentValidations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Persistence.Context;
 using Services.Interfaces;
 using Services.Interfaces.Shared;
@@ -63,6 +64,45 @@ builder.Services.AddScoped<IValidator<PdfOptionsDto>, PdfOptionsDtoValidator>();
 builder.Services.AddScoped<IValidator<PdfOutputDto>, PdfOutputDtoValidator>();
 
 #endregion FluentValidations
+
+#region Swagger
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+#region AuthenticationGen
+
+builder.Services.AddSwaggerGen(setup =>
+{
+    setup.AddSecurityDefinition(ApiKeyAuthenticationOptions.DefaultScheme, new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = ApiKeyAuthenticationOptions.HeaderName,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = ApiKeyAuthenticationOptions.DefaultScheme
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
+#endregion AuthenticationGen
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+#endregion Swagger
 
 #region MinimalAPIs
 

@@ -45,7 +45,7 @@ II) Implement Minimal APIs : [DONE].
 
 
 
-III) Implement API Key Authentication : [IP].
+III) Implement API Key Authentication : [DONE].
 {
 	--> Configure the Services for cleaner Architecture : [DONE].
 	--> Create the Microsoft Identity based 'ApiKeyAuthenticationOptions' Schema Service : [DONE].
@@ -84,10 +84,10 @@ V) Add Core Objects : [DONE].
 
 
 
-VI) Add Swagger Support : [IP].
+VI) Add Swagger Support : [DONE].
 {
-	--> Configure NugetPackages : [IP].
-	--> Add Swagger Dashboard for all endpoints : [IP].
+	--> Configure NugetPackages : [DONE].
+	--> Add Swagger Dashboard for all endpoints : [DONE].
 }
 
 

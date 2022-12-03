@@ -59,7 +59,7 @@ namespace Services.Shared.CachingService
             }
         }
 
-        #region InvalidateApiKey
+        #endregion InvalidateApiKey
 
         #region Helpers
 
