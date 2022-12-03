@@ -51,8 +51,6 @@ builder.Services.AddScoped<IValidator<PdfOutputDto>, PdfOutputDtoValidator>();
 
 #region MinimalAPIs
 
-app.MapGet("/", () => "Hello World!");
-
 #region GeneratePdfFromHtml
 
 app.MapPost("/GeneratePdfFromHtml", async (PdfInputDto? pdfInput, CancellationToken cancellationToken, IPdfGeneratorService pdfGeneratorService)
