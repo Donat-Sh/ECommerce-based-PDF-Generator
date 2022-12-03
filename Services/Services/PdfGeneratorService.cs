@@ -1,7 +1,7 @@
 ﻿using Core.Domain;
+using Microsoft.Extensions.Logging;
 using Persistence.Context;
 using Services.Interfaces;
-using System.IO;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
@@ -12,6 +12,7 @@ namespace Services.Services
         #region Properties
 
         private readonly PdfApiContext _pdfApiContext;
+        private readonly ILogger<PdfGeneratorService> _logger;
         private readonly IConverter _pdfConversion;
 
         #endregion Properties
@@ -20,14 +21,40 @@ namespace Services.Services
 
         public PdfGeneratorService(
                                        PdfApiContext pdfApiContext,
-                                       IConverter pdfConversion
+                                       IConverter pdfConversion,
+                                       ILogger<PdfGeneratorService> logger
                                   )
         {
             _pdfApiContext = pdfApiContext;
+            _logger = logger;
             _pdfConversion = pdfConversion;
         }
 
         #endregion Ctor
+
+        #region Authentication
+
+        #region ApiKey-Validation
+
+        public async Task<bool> ValidateApiKey(string apiKeyValue, CancellationToken cancellationToken)
+        {
+            try
+            {
+                //code...
+
+                return false;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, $"Error happened on {nameof(ValidateApiKey)}, whilst attempting to Validate given ApiKey Value for Authentication!");
+
+                throw;
+            }
+        }
+
+        #endregion ApiKey-Validation
+
+        #endregion Authentication
 
         #region PdfGeneration
 
@@ -85,7 +112,7 @@ namespace Services.Services
             }
             catch (Exception exception)
             {
-                //code...
+                _logger.LogError(exception, $"Error happened on {nameof(ConvertHtmlToPdf)}, whilst attempting to Convert InputData from HTML --> PDF!");
 
                 throw;
             }
