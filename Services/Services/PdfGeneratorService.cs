@@ -124,6 +124,8 @@ namespace Services.Services
 
         #region Helpers
 
+        #region ByteArrayToFile
+
         public void ByteArrayToFile(string fileName, byte[] byteArray)
         {
             try
@@ -141,6 +143,8 @@ namespace Services.Services
                 throw;
             }
         }
+
+        #endregion ByteArrayToFile
 
         #endregion Helpers
 
