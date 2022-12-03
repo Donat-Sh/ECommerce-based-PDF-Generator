@@ -5,16 +5,6 @@ namespace Services.Interfaces
 {
     public interface IPdfGeneratorService
     {
-        #region Authentication
-
-        #region ApiKey-Validation
-
-        Task<bool> ValidateApiKey(string apiKeyValue, CancellationToken cancellationToken);
-
-        #endregion ApiKey-Validation
-
-        #endregion Authentication
-
         #region PdfGeneration
 
         #region ConvertHtmlToPdf

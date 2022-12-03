@@ -21,7 +21,7 @@ Below is personal thoughts about current TaskFlow Structuring :
 		--> Add Ioc. : [DONE].
 		--> Log Errors on each exception : [DONE].
 	
-	--> if time, Add AutoMapper : [Aw].
+	--> if time, Add AutoMapper : [DONE].
 }
 
 
