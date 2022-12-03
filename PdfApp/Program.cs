@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Services.Interfaces;
+using Services.Interfaces.Shared;
 using Services.Services;
 using Services.Shared.ApiKeyServices;
 using WkHtmlToPdfDotNet;

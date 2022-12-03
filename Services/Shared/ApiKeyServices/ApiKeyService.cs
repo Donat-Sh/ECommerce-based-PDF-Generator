@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Persistence.Context;
-using Services.Interfaces;
+using Services.Interfaces.Shared;
 using System.Security.Cryptography;
 
 namespace Services.Shared.ApiKeyServices

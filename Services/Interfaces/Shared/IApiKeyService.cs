@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Services.Interfaces
+namespace Services.Interfaces.Shared
 {
     public interface IApiKeyService
     {
