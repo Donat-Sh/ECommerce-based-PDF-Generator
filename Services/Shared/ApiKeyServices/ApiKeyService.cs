@@ -4,7 +4,7 @@ using Persistence.Context;
 using Services.Interfaces;
 using System.Security.Cryptography;
 
-namespace Services.Shared
+namespace Services.Shared.ApiKeyServices
 {
     public class ApiKeyService : IApiKeyService
     {
