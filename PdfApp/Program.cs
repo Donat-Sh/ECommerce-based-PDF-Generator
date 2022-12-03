@@ -7,6 +7,7 @@ using Services.Interfaces;
 using Services.Interfaces.Shared;
 using Services.Services;
 using Services.Shared.ApiKeyServices;
+using Services.Shared.CachingService;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
@@ -18,9 +19,20 @@ var app = builder.Build();
 #region ServiceInjection
 
 builder.Services.AddDbContext<PdfApiContext>(opt => opt.UseInMemoryDatabase("PdfApi"));
+builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+
+#region ApiKeyAuthentication
+
+builder.Services.AddScoped<ApiKeyAuthenticationHandler>();
+builder.Services.AddAuthentication().AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, null);
+
+builder.Services.AddAuthentication(ApiKeyAuthenticationOptions.DefaultScheme);
+
+#endregion ApiKeyAuthentication
 
 #endregion ServiceInjection
 
@@ -41,7 +53,7 @@ var loggerFactory = LoggerFactory.Create(builder =>
 
 #endregion ILogger
 
-#region FluentValidation
+#region FluentValidations
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
@@ -50,7 +62,7 @@ builder.Services.AddScoped<IValidator<PageMarginsDto>, PageMarginsDtoValidator>(
 builder.Services.AddScoped<IValidator<PdfOptionsDto>, PdfOptionsDtoValidator>();
 builder.Services.AddScoped<IValidator<PdfOutputDto>, PdfOutputDtoValidator>();
 
-#endregion FluentValidation
+#endregion FluentValidations
 
 #region MinimalAPIs
 
