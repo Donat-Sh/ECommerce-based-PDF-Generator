@@ -6,6 +6,7 @@ namespace Core.Domain
     {
         #region Properties
 
+        public bool DownloadableProperty { get; set; }
         public string HtmlString { get; set; }
         public PdfOptionsDto Options { get; set; }
 

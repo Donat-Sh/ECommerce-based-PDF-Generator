@@ -88,7 +88,7 @@ namespace Services.Services
                             new ObjectSettings()
                             {
                                 PagesCount = true,
-                                HtmlContent = DownloadHtmlContent(pdfInput.HtmlString),
+                                HtmlContent = pdfInput.DownloadableProperty ? pdfInput.HtmlString : DownloadHtmlContent(pdfInput.HtmlString),
                                 WebSettings = { DefaultEncoding = "utf-8" },
                                 HeaderSettings =
                                 {
