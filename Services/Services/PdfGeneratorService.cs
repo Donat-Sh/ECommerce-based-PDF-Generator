@@ -6,6 +6,7 @@ using PdfApp.Attributes;
 using Persistence.Context;
 using Services.Interfaces;
 using Services.Interfaces.Shared;
+using System.Diagnostics;
 using System.Net;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
@@ -88,7 +89,7 @@ namespace Services.Services
                             new ObjectSettings()
                             {
                                 PagesCount = true,
-                                HtmlContent = pdfInput.DownloadableProperty ? pdfInput.HtmlString : DownloadHtmlContent(pdfInput.HtmlString),
+                                HtmlContent = !pdfInput.DownloadableProperty ? pdfInput.HtmlString : DownloadHtmlContent(pdfInput.HtmlString),
                                 WebSettings = { DefaultEncoding = "utf-8" },
                                 HeaderSettings =
                                 {
@@ -101,7 +102,17 @@ namespace Services.Services
                         }
                     };
 
+                    #region GeneratePdfByte
+
                     byte[] generatedPdf = _pdfConversion.Convert(inputDoc);
+
+                    if (!(generatedPdf?.Length > 0))
+                    {
+                        generatedPdf = ByteInternalProcessingWKHtmlToPdf(!pdfInput.DownloadableProperty ? pdfInput.HtmlString : DownloadHtmlContent(pdfInput.HtmlString));
+                    }
+
+                    #endregion GeneratePdfByte
+
                     var pdfDocumentEncoding = System.Convert.ToBase64String(generatedPdf);
                     convertedPdf = GetConvertedPdfDto(pdfInput.Options.PagePaperSize, pdfDocumentEncoding);
                     _logger.LogInformation("Successful .Pdf Document Service byte[] conversion to Base64!");
@@ -142,6 +153,58 @@ namespace Services.Services
         }
 
         #endregion DownloadHtmlContent
+
+        #region ByteInternalProcessingWKHtmlToPdf
+
+        public byte[] ByteInternalProcessingWKHtmlToPdf(string url)
+        {
+            var fileName = " - ";
+            var wkhtmlDir = "C:\\Program Files\\wkhtmltopdf\\bin\\";
+            var wkhtml = "C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe";
+            var p = new Process();
+
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.FileName = wkhtml;
+            p.StartInfo.WorkingDirectory = wkhtmlDir;
+
+            string switches = "";
+            switches += "--print-media-type ";
+            switches += "--margin-top 10mm --margin-bottom 10mm --margin-right 10mm --margin-left 10mm ";
+            switches += "--page-size Letter ";
+            p.StartInfo.Arguments = switches + " " + url + " " + fileName;
+            p.Start();
+
+            //read output
+            byte[] buffer = new byte[32768];
+            byte[] file;
+            using (var ms = new MemoryStream())
+            {
+                while (true)
+                {
+                    int read = p.StandardOutput.BaseStream.Read(buffer, 0, buffer.Length);
+
+                    if (read <= 0)
+                    {
+                        break;
+                    }
+                    
+                    ms.Write(buffer, 0, read);
+                }
+                file = ms.ToArray();
+            }
+
+            p.WaitForExit(60000);
+            int returnCode = p.ExitCode;
+            p.Close();
+
+            return returnCode == 0 ? file : null;
+        }
+
+        #endregion ByteInternalProcessingWKHtmlToPdf
 
         #region ByteArrayToFile
 
