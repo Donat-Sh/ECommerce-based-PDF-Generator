@@ -2,6 +2,7 @@
 using Core.Domain;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using PdfApp.Attributes;
 using Persistence.Context;
 using Services.Interfaces;
@@ -58,6 +59,7 @@ namespace Services.Services
                 var fileNameOutput = @"ConvertedPdfDocument.pdf";
                 var result = await _validator.ValidateAsync(pdfInput);
                 var convertedPdf = new PdfOutputDto("");
+                var htmlContent = pdfInput.DownloadableProperty ? DownloadHtmlContent(pdfInput.HtmlString) : pdfInput.HtmlString;
 
                 if (!result.IsValid)
                 {
@@ -89,7 +91,7 @@ namespace Services.Services
                             new ObjectSettings()
                             {
                                 PagesCount = true,
-                                HtmlContent = pdfInput.DownloadableProperty ? DownloadHtmlContent(pdfInput.HtmlString) : pdfInput.HtmlString,
+                                HtmlContent = htmlContent,
                                 WebSettings = { DefaultEncoding = "utf-8" },
                                 HeaderSettings =
                                 {
@@ -108,7 +110,7 @@ namespace Services.Services
 
                     if (!(generatedPdf?.Length > 0))
                     {
-                        generatedPdf = ByteInternalProcessingWKHtmlToPdf(!pdfInput.DownloadableProperty ? pdfInput.HtmlString : DownloadHtmlContent(pdfInput.HtmlString));
+                        generatedPdf = ByteInternalProcessingWKHtmlToPdf(htmlContent);
                     }
 
                     #endregion GeneratePdfByte

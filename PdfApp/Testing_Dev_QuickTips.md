@@ -8,7 +8,7 @@
 
 **Authentication**
 
-- API-Key should be given before the HTTPPost method testing begins, ApiKeyValue is : 7a8a7cd837b042b58b56617114f4d3d7
+- API-Key should be given before the HTTPPost method testing begins, ApiKeyValue is : 7a8a7cd837b042b58b56617114f4d3d7 (Also can be found on 'AppSetting.json' file).
 
 **Test Cases ready JSONs**
 
@@ -34,13 +34,13 @@
 }
 
 
-**Case I) - Taking parameter based HTML JSON-ified string & Converting to .pdf**
+**Case II) - Taking parameter based HTML JSON-ified string & Converting to .pdf**
 
 - JSON body is given below, note how the property 'downloadableProperty' is set to false now, since now the application can take the HTML from the parameter as JSON & then convert to the .PDF document.
 
 {
   "downloadableProperty": false,
-  "htmlString": "<h1>Test Header</h1>",
+  "htmlString": "PGgxPkhlbGxvITwvaDE+\",\n    \"options\": {\n        \"pageColorMode\": \"Color\",\n        \"pageOrientation\": \"Portrait\",\n        \"pagePaperSize\": \"A4\",\n        \"pageMargins\": {\n            \"top\": 10,\n            \"right\": 10,\n            \"bottom\": 10,\n            \"left\": 10\n        }\n        \n    }\n}",
   "options": {
     "colorMode": "Color",
     "pageOrientation": "Portrait",
@@ -54,3 +54,5 @@
     "errorMessage": ""
   }
 }
+
+-NOTE: Of course in case of bad validations the FluentValidator will notify of a failure & so will the failure of Authentication by providing the wrong ApiKey.
