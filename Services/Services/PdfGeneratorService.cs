@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using PdfApp.Attributes;
 using Persistence.Context;
 using Services.Interfaces;
+using Services.Interfaces.Shared;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
@@ -17,6 +18,7 @@ namespace Services.Services
         private readonly PdfApiContext _pdfApiContext;
         private readonly ILogger<PdfGeneratorService> _logger;
         private readonly IConverter _pdfConversion;
+        private readonly IEnumService _enumService;
         private readonly IValidator<PdfInputDto> _validator;
         private readonly IMapper _mapper;
 
@@ -28,6 +30,7 @@ namespace Services.Services
                                        PdfApiContext pdfApiContext,
                                        IConverter pdfConversion,
                                        ILogger<PdfGeneratorService> logger,
+                                       IEnumService enumService,
                                        IValidator<PdfInputDto> validator,
                                        IMapper mapper
                                   )
@@ -35,6 +38,7 @@ namespace Services.Services
             _pdfApiContext = pdfApiContext;
             _logger = logger;
             _pdfConversion = pdfConversion;
+            _enumService = enumService;
             _validator = validator;
             _mapper = mapper;
         }
@@ -62,18 +66,13 @@ namespace Services.Services
 
                 if (pdfInput != null)
                 {
-                    var test = (ColorMode)Enum.Parse(typeof(ColorMode), pdfInput.Options.ColorMode);
-
                     var inputDoc = new HtmlToPdfDocument()
                     {
                         GlobalSettings =
                         {
-                            ColorMode = ColorMode.Color,
-                            //ColorMode = (ColorMode)Enum.Parse(typeof(ColorMode), pdfInput.Options.ColorMode),
-                            Orientation = Orientation.Portrait,
-                            //Orientation = (Orientation)Enum.Parse(typeof(Orientation), pdfInput.Options.ColorMode),
-                            PaperSize = PaperKind.A4,
-                            //PaperSize = (PaperKind)Enum.Parse(typeof(PaperKind), pdfInput.Options.ColorMode),
+                            ColorMode = _enumService.GetEnumValueStringParam<ColorMode>(pdfInput.Options.ColorMode),
+                            Orientation = _enumService.GetEnumValueStringParam<Orientation>(pdfInput.Options.PagePaperSize),
+                            PaperSize = _enumService.GetEnumValueStringParam<PaperKind>(pdfInput.Options.PagePaperSize),
                             Margins = new MarginSettings()
                             {
                                 Top = pdfInput.Options.PageMargins.Top,

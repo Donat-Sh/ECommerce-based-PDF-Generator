@@ -12,6 +12,7 @@ using Services.Interfaces.Shared;
 using Services.Services;
 using Services.Shared.ApiKeyServices;
 using Services.Shared.CachingService;
+using Services.Shared.EnumServices;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
@@ -25,6 +26,7 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+builder.Services.AddScoped<IEnumService, EnumService>();
 
 #endregion ServiceInjection
 
