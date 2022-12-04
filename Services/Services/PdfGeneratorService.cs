@@ -6,6 +6,7 @@ using PdfApp.Attributes;
 using Persistence.Context;
 using Services.Interfaces;
 using Services.Interfaces.Shared;
+using System.Net;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
 
@@ -87,7 +88,7 @@ namespace Services.Services
                             new ObjectSettings()
                             {
                                 PagesCount = true,
-                                HtmlContent = pdfInput.HtmlString,
+                                HtmlContent = DownloadHtmlContent(pdfInput.HtmlString),
                                 WebSettings = { DefaultEncoding = "utf-8" },
                                 HeaderSettings =
                                 {
@@ -125,6 +126,22 @@ namespace Services.Services
         #endregion PdfGeneration
 
         #region Helpers
+
+        #region DownloadHtmlContent
+
+        public string DownloadHtmlContent(string urlLink)
+        {
+            var htmlContent = "";
+
+            using (var client = new WebClient())
+            {
+                htmlContent = client.DownloadString(urlLink);
+            }
+
+            return htmlContent;
+        }
+
+        #endregion DownloadHtmlContent
 
         #region ByteArrayToFile
 
