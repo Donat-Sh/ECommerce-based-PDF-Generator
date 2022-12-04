@@ -53,9 +53,9 @@ namespace Services.Services
         {
             try
             {
-                var convertedPdf = GetConvertedPdfDto();
                 var fileNameOutput = @"ConvertedPdfDocument.pdf";
                 var result = await _validator.ValidateAsync(pdfInput);
+                var convertedPdf = new PdfOutputDto("");
 
                 if (!result.IsValid)
                 {
@@ -89,7 +89,6 @@ namespace Services.Services
                                 PagesCount = true,
                                 HtmlContent = pdfInput.HtmlString,
                                 WebSettings = { DefaultEncoding = "utf-8" },
-                                //WebSettings = { DefaultEncoding = "Base64Encode" },
                                 HeaderSettings =
                                 {
                                     FontSize = 9,
@@ -102,6 +101,10 @@ namespace Services.Services
                     };
 
                     byte[] generatedPdf = _pdfConversion.Convert(inputDoc);
+                    var pdfDocumentEncoding = System.Convert.ToBase64String(generatedPdf);
+                    convertedPdf = GetConvertedPdfDto(pdfInput.Options.PagePaperSize, pdfDocumentEncoding);
+                    _logger.LogInformation("Successful .Pdf Document Service byte[] conversion to Base64!");
+
                     ByteArrayToFile(fileNameOutput, generatedPdf);
                 }
 
@@ -153,9 +156,12 @@ namespace Services.Services
 
         #region GetConvertedPdfDto
 
-        private PdfOutputDto GetConvertedPdfDto() => new PdfOutputDto("")
+        private PdfOutputDto GetConvertedPdfDto(string paperSize, string pdfDocument, string errorMessage = "") => new PdfOutputDto(errorMessage)
         {
-            
+            IsSuccess = false,
+            ErrorMessage = errorMessage,
+            PdfDocumentSize = paperSize,
+            PdfDocument = Base64Encode(pdfDocument)
         };
 
         #endregion GetConvertedPdfDto
@@ -164,10 +170,37 @@ namespace Services.Services
 
         private PdfOutputDto GetFailedValidationPdfOutput(string errorMessage) => new PdfOutputDto(errorMessage)
         {
-            IsSuccess = false
+            IsSuccess = true,
+            ErrorMessage = errorMessage
         };
 
         #endregion GetFailedValidationPdfOutput
+
+        #region Base64Encryption
+
+        #region EncodeBase64
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        #endregion EncodeBase64
+
+        #region DecodeBase64
+
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        #endregion DecodeBase64
+
+        #endregion Base64Encryption
 
         #endregion Private-Methods
     }

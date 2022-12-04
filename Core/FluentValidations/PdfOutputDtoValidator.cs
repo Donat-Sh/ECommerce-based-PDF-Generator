@@ -10,7 +10,7 @@ namespace Core.FluentValidations
             #region Properties
 
             RuleFor(x => x.PdfDocument).NotEmpty().WithMessage("OutPut .pdf document cannot be empty or null");
-            RuleFor(x => x.PdfDocumentSize).NotNull().GreaterThan(0).WithMessage("OutPut .pdf document size be null or valued 'negative/zero'");
+            RuleFor(x => x.PdfDocumentSize).NotEmpty().WithMessage("OutPut .pdf document size cannot be empty or null");
 
             #endregion Properties
         }

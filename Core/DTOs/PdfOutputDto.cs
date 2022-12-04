@@ -7,9 +7,9 @@ namespace Core.Domain
         #region Properties
 
         public bool IsSuccess { get; set; }
-        public string ErrorMessage { get; private set; }
-        public string PdfDocument { get; private set; }
-        public int PdfDocumentSize { get; private set; }
+        public string ErrorMessage { get; set; }
+        public string PdfDocument { get; set; }
+        public string PdfDocumentSize { get; set; }
 
         #endregion Properties
 
@@ -17,7 +17,7 @@ namespace Core.Domain
 
         public PdfOutputDto(string errorMessage) => ErrorMessage = errorMessage;
 
-        public PdfOutputDto(string pdfDocument, int pdfDocumentSize)
+        public PdfOutputDto(string pdfDocument, string pdfDocumentSize)
         {
             PdfDocument = pdfDocument;
             PdfDocumentSize = pdfDocumentSize;
